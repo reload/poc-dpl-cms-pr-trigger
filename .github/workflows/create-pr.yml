@@ -13,6 +13,7 @@ jobs:
         env:
           BUILD_URL: ${{ github.event.client_payload.build_url }}
           PR_BRANCH: ${{ github.event.client_payload.branch }}
+          PACKAGE: ${{ github.event.client_payload.dependency_package }}
         run: |
           echo "PR_BRANCH=$PR_BRANCH" >> $GITHUB_ENV
           echo "BUILD_URL=$BUILD_URL" >> $GITHUB_ENV
