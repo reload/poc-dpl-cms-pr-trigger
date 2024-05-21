@@ -11,12 +11,14 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Testing
         run: |
-          BRANCH_EXISTS=$(git fetch origin develop || echo "John")
-          echo "$BRANCH_EXISTS"
-          # echo "BUILD_URL_IS_ACCEPTED=$BUILD_URL_IS_ACCEPTED" >> $GITHUB_ENV
+          echo "BRANCH_EXISTS=$(git show-ref --quiet refs/heads/abe && echo 'true' || echo 'false')" >> $GITHUB_ENV
+
       - name: Testing II
         run: |
-          echo "Hello"
+          echo "${{ toJson(env) }}"
