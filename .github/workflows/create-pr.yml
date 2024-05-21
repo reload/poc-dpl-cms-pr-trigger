@@ -33,6 +33,11 @@ jobs:
           fetch-depth: 0
         if: ${{ env.PR_BRANCH && env.BUILD_URL }}
 
+      - name: Check if branch exists already
+        run: |
+          echo "BRANCH_EXISTS=$(git show-ref --quiet refs/heads/${{ env.PR_BRANCH }} && echo 'true' || echo 'false')" >> $GITHUB_ENV
+        if: ${{ env.PR_BRANCH }}
+
       - name: Insert dependency
         uses: Wandalen/wretry.action@master
         id: manipulate_composer
@@ -43,7 +48,7 @@ jobs:
             composer remove ${{ env.PACKAGE }} \
             && composer require ${{ env.PACKAGE }}
           attempt_limit: 200
-        if: ${{ env.BUILD_URL && env.PACKAGE && env.BUILD_URL_IS_ACCEPTED == 'true' }}
+        if: ${{ env.BRANCH_EXISTS == 'false' && env.BUILD_URL && env.PACKAGE && env.BUILD_URL_IS_ACCEPTED == 'true' }}
 
       - name: Create branch and PR
         id: create_pr
