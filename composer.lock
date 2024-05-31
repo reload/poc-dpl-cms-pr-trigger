@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac6f0f0f7a95237c8621dfd0fab4cfae",
+    "content-hash": "c57898e0ee148ab44bfe61416da6ddf6",
     "packages": [
         {
             "name": "amazeeio/drupal_integrations",
@@ -10486,6 +10486,18 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "reload/poc-dpl-design-system-pr-trigger",
+            "version": "dev-master",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/reload/poc-dpl-design-system-pr-trigger/releases/download/branch-ununpentium-locomotor-zeren/dist-ununpentium-locomotor-zeren.zip"
+            },
+            "require": {
+                "composer/installers": "^1.2.0"
+            },
+            "type": "drupal-library"
         },
         {
             "name": "sebastian/diff",
