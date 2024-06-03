@@ -9,6 +9,21 @@
         }
     ],
     "repositories": {
+        "reload/poc-dpl-react-pr-trigger": {
+            "type": "package",
+            "package": {
+                "name": "reload/poc-dpl-react-pr-trigger",
+                "version": "dev-master",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/reload/poc-dpl-react-pr-trigger/releases/download/branch-wild-cerebroid-atlanticspadefish/dist-wild-cerebroid-atlanticspadefish.zip",
+                    "type": "zip"
+                },
+                "require": {
+                    "composer/installers": "^1.2.0"
+                }
+            }
+        },
         "drupal/potion": {
             "type": "package",
             "package": {
@@ -164,6 +179,7 @@
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "phpdocumentor/reflection-docblock": "^5.3",
+        "reload/poc-dpl-react-pr-trigger": "dev-master",
         "spatie/color": "^1.5",
         "symfony/property-access": "^6.2",
         "symfony/property-info": "^6.2",
