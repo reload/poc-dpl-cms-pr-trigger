@@ -25,20 +25,20 @@ jobs:
         run: |
           set -e
           echo "IGNORED_PR_AUTHORS: ${{ vars.IGNORED_PR_AUTHORS }}"
-          echo "PR author: ${{ github.event.pull_request.user.login }}"
+          echo "PR author: ${{ env.PR_AUTHOR }}"
 
-          # AUTHOR_IS_IGNORED=$(echo '${{ vars.IGNORED_PR_AUTHORS }}' | jq --arg author "${{ github.event.pull_request.user.login }}" 'any(.[]; . as $user | $author | match($user))')
           echo "AUTHOR_IS_IGNORED: ${{ env.AUTHOR_IS_IGNORED }}"
 
-          echo "PR author is ${{ github.event.pull_request.user.login }}"
-          exit 1
-          if [[ "${{ github.event.pull_request.user.login }}" == "dpl-bot" ]]
+          echo "PR author is ${{ env.PR_AUTHOR }}"
+
+          if [[ "${{ env.AUTHOR_IS_IGNORED }}" == "true" ]]
           then
-            echo "PR author is dpl-bot. Skipping deployment."
+            echo "PR author (${{ env.PR_AUTHOR }}) is ignored. Skipping deployment..."
             exit 1
           fi
         if: ${{ vars.IGNORED_PR_AUTHORS }}
         env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
           AUTHOR_IS_IGNORED: $(echo '${{ vars.IGNORED_PR_AUTHORS }}' | jq --arg author "${{ github.event.pull_request.user.login }}" 'any(.[]; . as $user | $author | match($user))')
 
   BranchNameLength:
