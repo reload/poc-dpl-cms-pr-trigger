@@ -23,8 +23,13 @@ jobs:
     steps:
       - name: Check PR author
         run: |
-          echo "PR Author accepted. Continuing..."
-        if: ${{ vars.IGNORED_PR_AUTHORS && env.AUTHOR_IS_IGNORED == 'false'  }}
+          set -e
+          if [[ "${{ env.AUTHOR_IS_IGNORED }}" == "true" ]]
+          then
+            echo "${{ format('PR author {0} is not allowed to create Lagoon environments. Skipping deployment...', env.PR_AUTHOR) }}"
+            exit 1
+          fi
+        if: ${{ vars.IGNORED_PR_AUTHORS }}
         env:
           AUTHOR_IS_IGNORED: $(echo '${{ vars.IGNORED_PR_AUTHORS }}' | jq --arg author "${{ github.event.pull_request.user.login }}" 'any(.[]; . as $user | $author | match($user))')
 
