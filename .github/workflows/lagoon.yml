@@ -26,7 +26,7 @@ jobs:
           set -e
           if [[ "${{ env.AUTHOR_IS_IGNORED }}" == "true" ]]
           then
-            echo "${{ format('PR author {0} is not allowed to create Lagoon environments. Skipping deployment...', env.PR_AUTHOR) }}"
+            echo "${{ format('PR author {0} is not allowed to create Lagoon environments. Skipping deployment...', env.PR_AUTHOR) }}" >> $GITHUB_SUMMARY
             exit 1
           fi
         if: ${{ vars.IGNORED_PR_AUTHORS }}
