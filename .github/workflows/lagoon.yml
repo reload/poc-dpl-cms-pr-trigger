@@ -27,7 +27,7 @@ jobs:
           echo "IGNORED_PR_AUTHORS: ${{ vars.IGNORED_PR_AUTHORS }}"
           echo "PR author: ${{ github.event.pull_request.user.login }}"
 
-          AUTHOR_IS_IGNORED=$(echo '${{ vars.IGNORED_PR_AUTHORS }}' | jq --arg author "${{ github.event.pull_request.user.login }}" 'any(.[]; . as $ | $author | match($))')
+          AUTHOR_IS_IGNORED=$(echo '${{ vars.IGNORED_PR_AUTHORS }}' | jq --arg author "${{ github.event.pull_request.user.login }}" 'any(.[]; . as $user | $author | match($user))')
 
           echo "PR author is ${{ github.event.pull_request.user.login }}"
           exit 1
